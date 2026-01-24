@@ -5,7 +5,8 @@ import Mass from "../pages/Mass";
 import Time from "../pages/Time";
 import FractionOperations from "../pages/FractionOperations";
 import ConvertFraction from "../pages/ConvertFraction";
-import SimplifyFraction from "../pages/simplifyFraction";
+import SimplifyFraction from "../pages/SimplifyFraction";
+
 export default function Function() {
   const { funcName } = useParams();
 

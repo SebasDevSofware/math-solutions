@@ -47,7 +47,6 @@ export default function SimplifyFraction() {
       return;
     }
 
-    // Si alguno contiene notación exponencial o caracteres no numéricos, rechazar
     if (nStr.includes("e") || dStr.includes("e")) {
       setErr("Invalid Input");
       return;
@@ -56,7 +55,12 @@ export default function SimplifyFraction() {
     const nNum = Number(nStr);
     const dNum = Number(dStr);
 
-    if (!Number.isFinite(nNum) || !Number.isFinite(dNum) || isNaN(nNum) || isNaN(dNum)) {
+    if (
+      !Number.isFinite(nNum) ||
+      !Number.isFinite(dNum) ||
+      isNaN(nNum) ||
+      isNaN(dNum)
+    ) {
       setErr("Invalid Input");
       return;
     }
