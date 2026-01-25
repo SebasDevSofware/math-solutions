@@ -1,42 +1,77 @@
+import { BlockMath } from "react-katex";
 import { Link } from "react-router-dom";
 
-function Home() {
-  return (
-    <>
-      <article className="w-[90%] min-h-full border border-gray-300 rounded-xl shadow-gray-400 shadow-xl flex md:justify-between justify-center  items-center relative">
-        <section className="p-5 md:w-3/6 w-6/6 flex flex-col relative z-10 gap-10 text-center">
-          <h1
-            className="md:text-6xl text-3xl text-main font-extrabold"
-            title="Math Solutions Title"
-          >
-            Math Solucions <span className="text-black">for your problems</span>
-          </h1>
-          <p className="md:text-xl text-large text-justify">
-            This app is the evolution of the mathematical workspace. We have
-            redefined the way professionals, students, and researchers interact
-            with calculus and logic. This application is not just a calculator;
-            it is a modern, integral ecosystem meticulously designed to
-            consolidate a vast repertoire of advanced mathematical functions in
-            one accessible place.
-          </p>
+export default function Home() {
+  const features = [
+    {
+      title: "Cálculo Avanzado",
+      desc: "Resolución de matrices, fracciones y funciones complejas mediante MathJS.",
+      icon: "f(x)",
+    },
+    {
+      title: "Renderizado Profesional",
+      desc: "Visualización de ecuaciones en alta calidad con KaTeX.",
+      icon: "\\sum",
+    },
+    {
+      title: "Rendimiento Optimizado",
+      desc: "Uso de Web Workers para cálculos pesados sin bloquear la interfaz.",
+      icon: "0101",
+    },
+  ];
 
-          <Link
-            to="/funcs"
-            className="bg-main px-2 py-4 text-gray-100 md:text-2xl text-xl font-bold rounded-xl text-center hover:scale-90 transition-transform"
+  return (
+    <section className="flex flex-col gap-10 p-6 md:p-12 bg-gray-300 rounded-[2.5rem] w-full max-w-5xl mx-auto my-10 border border-white/20">
+      {/* Encabezado Principal */}
+      <div className="text-center space-y-4">
+        <h1 className="text-4xl md:text-6xl font-black text-gray-800 tracking-tighter uppercase">
+          Math<span className="text-main">Solutions</span>
+        </h1>
+        <p className="text-gray-600 text-lg md:text-xl font-medium max-w-2xl mx-auto">
+          Una suite de herramientas matemáticas diseñada para la precisión, la
+          claridad y el aprendizaje interactivo.
+        </p>
+      </div>
+
+      {/* Grid de Características */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {features.map((f, i) => (
+          <div
+            key={i}
+            className="bg-white/60 p-6 rounded-3xl hover:bg-white transition-all group shadow-sm"
           >
-            Go to functions.
-          </Link>
-        </section>
-        <section className="absolute inset-y-0 right-0 w-3/6 h-full z-0 overflow-hidden md:block hidden">
-          <img
-            src="src/assets/math.webp"
-            alt="Blackboard with mathematical calculations"
-            className="w-full h-full object-cover opacity-80"
-          />
-        </section>
-      </article>
-    </>
+            <div className="text-2xl font-mono text-main mb-3 bg-white w-fit px-3 py-1 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
+              {f.icon}
+            </div>
+            <h3 className="text-xl font-bold text-gray-800 mb-2">{f.title}</h3>
+            <p className="text-gray-600 text-sm leading-relaxed">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Sección "Cómo funciona" con KaTeX */}
+      <div className="bg-main text-white p-8 rounded-[2rem] shadow-lg flex flex-col md:flex-row items-center gap-8">
+        <div className="flex-1 space-y-4">
+          <h2 className="text-3xl font-bold tracking-tight">
+            Potencia Matemática
+          </h2>
+          <p className="opacity-90 leading-relaxed">
+            Nuestra aplicación no solo calcula resultados, sino que interpreta
+            la sintaxis matemática para presentarte el proceso formal. Desde la
+            aritmética básica hasta el álgebra lineal avanzada.
+          </p>
+        </div>
+        <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 overflow-x-auto w-full md:w-auto md:text-xl text-xs">
+          <BlockMath math="\int_{a}^{b} f(x)dx = F(b) - F(a)" />
+        </div>
+      </div>
+
+      <Link
+        to="/funcs"
+        className="bg-main px-2 py-4 text-gray-100 md:text-2xl text-xl font-bold rounded-xl text-center hover:scale-90 transition-transform"
+      >
+        Go to functions.
+      </Link>
+    </section>
   );
 }
-
-export default Home;

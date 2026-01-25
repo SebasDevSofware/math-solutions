@@ -129,7 +129,7 @@ export default function Length() {
           <p className="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold w-full">
             Mathematical Process:
           </p>
-          <div className="overflow-x-auto py-2">
+          <div className="md:text-xl text-xs overflow-x-auto py-2 text-main">
             <BlockMath math={renderProcedure() || ""} />
           </div>
         </div>

@@ -166,23 +166,25 @@ export default function FractionOperations() {
         )}
       </div>
 
-      <div className="mt-4 p-4 bg-gray-50 rounded-xl w-full border-l-4 border-main">
-        <div className="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold w-full">
-          <span className="text-gray-400 text-sm font-bold tracking-widest uppercase">
-            Mathematical Process
-          </span>
+      {result && (
+        <div className="mt-4 p-4 bg-gray-50 rounded-xl w-full border-l-4 border-main">
+          <div className="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold w-full">
+            <span className="text-gray-400 text-sm font-bold tracking-widest uppercase">
+              Mathematical Process
+            </span>
 
-          {operation ? (
-            <div className="sm:text-2xl text-xs text-main ">
-              <BlockMath math={renderEquation()} />
-            </div>
-          ) : (
-            <p className="text-gray-300 italic">Enter data to get ecuation</p>
-          )}
+            {operation ? (
+              <div className="sm:text-2xl text-xs text-main ">
+                <BlockMath math={renderEquation()} />
+              </div>
+            ) : (
+              <p className="text-gray-300 italic">Enter data to get ecuation</p>
+            )}
 
-          {err && <span className="text-red-500 font-bold">{err}</span>}
+            {err && <span className="text-red-500 font-bold">{err}</span>}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

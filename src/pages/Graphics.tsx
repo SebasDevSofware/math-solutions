@@ -1,6 +1,6 @@
-import { useState } from "react";
 import Plot from "react-plotly.js";
 import { BlockMath } from "react-katex";
+import { useState } from "react";
 
 export default function Graphics() {
   const [xValues, setXValues] = useState<number[]>(

@@ -3,8 +3,6 @@ import Layout from "../layout";
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Error404 from "../components/Error404";
-import FunctionsLayout from "../pages/FunctionsLayout";
-import Function from "../components/Function";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +13,22 @@ const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       {
         path: "/funcs",
-        element: <FunctionsLayout />,
-        children: [{ path: ":funcName", element: <Function /> }],
+        lazy: {
+          loader: async () => (await import("../components/Loader")).default,
+          Component: async () =>
+            (await import("../pages/FunctionsLayout")).default,
+        },
+        children: [
+          {
+            path: ":funcName",
+            lazy: {
+              loader: async () =>
+                (await import("../components/Loader")).default,
+              Component: async () =>
+                (await import("../components/Function")).default,
+            },
+          },
+        ],
       },
     ],
     errorElement: <Error404 />,

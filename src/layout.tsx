@@ -7,7 +7,7 @@ export default function Layout() {
       <header>
         <NavBar />
       </header>
-      {}
+
       <div className="h-14 md:h-16" />
       <main className="flex justify-center items-center py-4">
         <Outlet />

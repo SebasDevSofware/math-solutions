@@ -1,13 +1,18 @@
 import { useParams } from "react-router-dom";
-import MultiplicationTables from "../pages/MultiplicationTables";
-import Length from "../pages/Length";
-import Mass from "../pages/Mass";
-import Time from "../pages/Time";
-import FractionOperations from "../pages/FractionOperations";
-import ConvertFraction from "../pages/ConvertFraction";
-import SimplifyFraction from "../pages/SimplifyFraction";
-import Graphics from "../pages/Graphics";
-import MatrixCalculator from "../pages/Matrix";
+import { lazy } from "react";
+
+const MultiplicationTables = lazy(
+  () => import("../pages/MultiplicationTables"),
+);
+const Length = lazy(() => import("../pages/Length"));
+const Mass = lazy(() => import("../pages/Mass"));
+const Time = lazy(() => import("../pages/Time"));
+const FractionOperations = lazy(() => import("../pages/FractionOperations"));
+const ConvertFraction = lazy(() => import("../pages/ConvertFraction"));
+const SimplifyFraction = lazy(() => import("../pages/SimplifyFraction"));
+const Graphics = lazy(() => import("../pages/Graphics"));
+const MatrixCalculator = lazy(() => import("../pages/Matrix"));
+const Calculator = lazy(() => import("../pages/Calculator"));
 
 export default function Function() {
   const { funcName } = useParams();
@@ -31,6 +36,8 @@ export default function Function() {
       return <Graphics />;
     case "arrays":
       return <MatrixCalculator />;
+    case "calculator":
+      return <Calculator />;
 
     default:
       return (

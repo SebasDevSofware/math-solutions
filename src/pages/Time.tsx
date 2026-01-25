@@ -124,7 +124,7 @@ export default function Time() {
           <p className="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold w-full">
             Mathematical Process:
           </p>
-          <div className="overflow-x-auto py-2">
+          <div className="overflow-x-auto py-2 text-main md:text-xl text-xs ">
             <BlockMath math={renderProcedure() || ""} />
           </div>
         </div>
