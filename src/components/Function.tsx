@@ -6,6 +6,8 @@ import Time from "../pages/Time";
 import FractionOperations from "../pages/FractionOperations";
 import ConvertFraction from "../pages/ConvertFraction";
 import SimplifyFraction from "../pages/SimplifyFraction";
+import Graphics from "../pages/Graphics";
+import MatrixCalculator from "../pages/Matrix";
 
 export default function Function() {
   const { funcName } = useParams();
@@ -25,6 +27,10 @@ export default function Function() {
       return <ConvertFraction />;
     case "simplifyFraction":
       return <SimplifyFraction />;
+    case "graphics":
+      return <Graphics />;
+    case "arrays":
+      return <MatrixCalculator />;
 
     default:
       return (

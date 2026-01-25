@@ -1,20 +1,22 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import NumberInput from "../components/NumberInput";
+import { BlockMath } from "react-katex";
 
 export default function Length() {
   const [inputFromVal, setInputFromVal] = useState<number | null>(null);
   const [inputFromUnit, setInputFromUnit] = useState<string | null>(null);
   const [inputToUnit, setInputToUnit] = useState<string | null>(null);
-  const [result, setResult] = useState<null | { n: number; unit: string }>(
-    null
-  );
+  const [result, setResult] = useState<null | {
+    n: number | null;
+    unit: string;
+  }>(null);
   const workerRef = useRef<Worker | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
     workerRef.current = new Worker(
       new URL("../workers/convertUnits.worker.ts", import.meta.url),
-      { type: "module" }
+      { type: "module" },
     );
 
     workerRef.current.onmessage = (e) => {
@@ -62,6 +64,14 @@ export default function Length() {
     setErr(null);
   };
 
+  const renderProcedure = () => {
+    if (!result || inputFromVal === null) return null;
+    if (result.n === null || !Number.isFinite(result.n)) return null;
+
+    const factor = result.n / inputFromVal;
+    return `${inputFromVal}\\text{ ${inputFromUnit}} \\times \\left( \\frac{${factor.toFixed(4)}\\text{ ${inputToUnit}}}{1\\text{ ${inputFromUnit}}} \\right) = ${result.n.toFixed(4)}\\text{ ${inputToUnit}}`;
+  };
+
   return (
     <section className="w-full flex flex-col justify-center items-center gap-4 mb-2">
       <form
@@ -106,13 +116,24 @@ export default function Length() {
         <span className="text-main font-extrabold">Result: </span>
         <output>
           {result
-            ? Number.isFinite(result.n)
+            ? Number.isFinite(result.n) && result.n !== null
               ? +result.n.toFixed(4)
               : "?"
             : "?"}
         </output>
         <span>{result?.unit ?? ""}</span>
       </div>
+
+      {result && (
+        <div className="mt-4 p-4 bg-gray-50 rounded-xl w-full border-l-4 border-main">
+          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold w-full">
+            Mathematical Process:
+          </p>
+          <div className="overflow-x-auto py-2">
+            <BlockMath math={renderProcedure() || ""} />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

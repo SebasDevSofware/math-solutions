@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import NumberInput from "../components/NumberInput";
+import { BlockMath } from "react-katex";
 
 export default function FractionOperations() {
   const [operation, setOperation] = useState<string | null>(null);
@@ -15,7 +16,7 @@ export default function FractionOperations() {
   useEffect(() => {
     workerRef.current = new Worker(
       new URL("../workers/fractionOperations.worker.ts", import.meta.url),
-      { type: "module" }
+      { type: "module" },
     );
 
     workerRef.current.onmessage = (e) => {
@@ -83,6 +84,32 @@ export default function FractionOperations() {
     setOperation(op.toString());
   };
 
+  const renderEquation = () => {
+    if (
+      num1 === null ||
+      den1 === null ||
+      num2 === null ||
+      den2 === null ||
+      !operation ||
+      !result
+    )
+      return "";
+
+    const sign = operation === "add" ? "+" : "-";
+
+    switch (operation) {
+      case "add":
+      case "sub":
+        return `\\frac{${num1}}{${den1}} ${sign} \\frac{${num2}}{${den2}} = \\frac{(${num1} \\times ${den2}) ${sign} (${num2} \\times ${den1})}{${den1} \\times ${den2}} = \\frac{${num1 * den2} ${sign} ${num2 * den1}}{${den1 * den2}} = \\frac{${result.n}}{${result.d}}`;
+      case "mul":
+        return `\\frac{${num1}}{${den1}} \\times \\frac{${num2}}{${den2}} = \\frac{${num1} \\times ${num2}}{${den1} \\times ${den2}} = \\frac{${num1 * num2}}{${den1 * den2}} = \\frac{${result.n}}{${result.d}}`;
+      case "div":
+        return `\\frac{${num1}}{${den1}} \\div \\frac{${num2}}{${den2}} = \\frac{${num1} \\times ${den2}}{${den1} \\times ${num2}} = \\frac{${num1 * den2}}{${den1 * num2}} = \\frac{${result.n}}{${result.d}}`;
+      default:
+        return "";
+    }
+  };
+
   return (
     <section className="w-full flex flex-col justify-center items-center gap-6">
       <form
@@ -137,6 +164,24 @@ export default function FractionOperations() {
         ) : (
           ""
         )}
+      </div>
+
+      <div className="mt-4 p-4 bg-gray-50 rounded-xl w-full border-l-4 border-main">
+        <div className="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold w-full">
+          <span className="text-gray-400 text-sm font-bold tracking-widest uppercase">
+            Mathematical Process
+          </span>
+
+          {operation ? (
+            <div className="sm:text-2xl text-xs text-main ">
+              <BlockMath math={renderEquation()} />
+            </div>
+          ) : (
+            <p className="text-gray-300 italic">Enter data to get ecuation</p>
+          )}
+
+          {err && <span className="text-red-500 font-bold">{err}</span>}
+        </div>
       </div>
     </section>
   );

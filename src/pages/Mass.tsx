@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import NumberInput from "../components/NumberInput";
+import { BlockMath } from "react-katex";
 
 export default function Mass() {
   const [inputFromVal, setInputFromVal] = useState<number | null>(null);
   const [inputFromUnit, setInputFromUnit] = useState<string | null>(null);
   const [inputToUnit, setInputToUnit] = useState<string | null>(null);
   const [result, setResult] = useState<null | { n: number; unit: string }>(
-    null
+    null,
   );
   const [err, setErr] = useState<string | null>(null);
   const workerRef = useRef<Worker | null>(null);
@@ -14,7 +15,7 @@ export default function Mass() {
   useEffect(() => {
     workerRef.current = new Worker(
       new URL("../workers/convertUnits.worker.ts", import.meta.url),
-      { type: "module" }
+      { type: "module" },
     );
 
     workerRef.current.onmessage = (e) => {
@@ -62,6 +63,14 @@ export default function Mass() {
     setErr(null);
   };
 
+  const renderProcedure = () => {
+    if (!result || inputFromVal === null) return null;
+    if (!Number.isFinite(result.n)) return null;
+
+    const factor = result.n / inputFromVal;
+    return `${inputFromVal}\\text{ ${inputFromUnit}} \\times \\left( \\frac{${factor.toFixed(4)}\\text{ ${inputToUnit}}}{1\\text{ ${inputFromUnit}}} \\right) = ${result.n.toFixed(4)}\\text{ ${inputToUnit}}`;
+  };
+
   return (
     <section className="w-full flex flex-col justify-center items-center gap-4 mb-2">
       <form
@@ -107,6 +116,17 @@ export default function Mass() {
         </output>
         <span>{result?.unit ?? ""}</span>
       </div>
+
+      {result && (
+        <div className="mt-4 p-4 bg-gray-50 rounded-xl w-full border-l-4 border-main">
+          <p className="text-xs text-gray-500 uppercase tracking-widest mb-2 font-bold w-full">
+            Mathematical Process:
+          </p>
+          <div className="overflow-x-auto py-2">
+            <BlockMath math={renderProcedure() || ""} />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -1,7 +1,5 @@
 import {
   faCalculator,
-  faInfinity,
-  faPencilRuler,
   faTimes,
   faChartArea,
   faBorderAll,
@@ -28,19 +26,6 @@ export const FUNCTIONS_BOXES: FunctionsBox[] = [
     path: "/multiplicationTables",
     funcId: 2,
   },
-  {
-    functionName: "Derivatives",
-    boxIcon: <FontAwesomeIcon icon={faPencilRuler} />,
-    path: "/derivatives",
-    funcId: 4,
-  },
-  {
-    functionName: "Integral",
-    boxIcon: <FontAwesomeIcon icon={faInfinity} />,
-    path: "/integral",
-    funcId: 5,
-  },
-
   {
     functionName: "Graphics",
     boxIcon: <FontAwesomeIcon icon={faChartArea} />,
@@ -97,3 +82,16 @@ export const FUNCTIONS_BOXES: FunctionsBox[] = [
     funcId: 11,
   },
 ];
+
+/* {
+    functionName: "Derivatives",
+    boxIcon: <FontAwesomeIcon icon={faPencilRuler} />,
+    path: "/derivatives",
+    funcId: 4,
+  },
+  {
+    functionName: "Integral",
+    boxIcon: <FontAwesomeIcon icon={faInfinity} />,
+    path: "/integral",
+    funcId: 5,
+  */

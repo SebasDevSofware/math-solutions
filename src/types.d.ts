@@ -4,3 +4,5 @@ export type FunctionsBox = {
   path: `/${string}`;
   funcId: number;
 };
+
+export type MatrixData = number[][];
