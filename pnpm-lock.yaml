@@ -26,9 +26,6 @@ importers:
       convert-units:
         specifier: ^2.3.4
         version: 2.3.4
-      decimal.js:
-        specifier: ^10.6.0
-        version: 10.6.0
       fraction.js:
         specifier: ^5.3.4
         version: 5.3.4

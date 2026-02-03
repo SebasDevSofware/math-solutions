@@ -1,4 +1,4 @@
-➕ Funcionalidades Nuevas
+[] Calculadora Responsiva
 
 [❌] Funcionalidad de Derivadas: Implementar la lógica para calcular derivadas de funciones simples.
 

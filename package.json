@@ -17,7 +17,6 @@
     "@tailwindcss/vite": "^4.1.17",
     "@types/convert-units": "^2.3.12",
     "convert-units": "^2.3.4",
-    "decimal.js": "^10.6.0",
     "fraction.js": "^5.3.4",
     "katex": "^0.16.27",
     "mathjs": "^15.1.0",
