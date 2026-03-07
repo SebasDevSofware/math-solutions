@@ -11,6 +11,15 @@ export default function About() {
     "React Icons",
   ];
 
+  const autors = [
+    "Camila Acevedo",
+    "Sofia Herrera",
+    "Ginger Mejías",
+    "Stefany Ramírez",
+    "Sharon Rivero",
+    "Yoseannys Valera",
+  ];
+
   return (
     <section className="flex flex-col gap-12 p-8 md:p-16 bg-gray-300 rounded-[2.5rem] w-full max-w-4xl mx-auto my-10 border border-white/40">
       <div className="space-y-6">
@@ -18,16 +27,20 @@ export default function About() {
           Desarrollado por
         </h3>
         <div className="flex flex-wrap gap-4">
-          <div className="flex items-center gap-4 bg-white/50 px-6 py-3 rounded-2xl border border-white/50 shadow-sm">
-            <div className="w-10 h-10 bg-main rounded-full flex items-center justify-center text-white font-bold">
-              S
-            </div>
-            <div>
-              Aqui van sus nombres
-              {/* <p className="font-bold text-gray-800 leading-none">Sebastian</p>*/}
-              {/* <p className="text-xs text-gray-500">Lead Developer</p>*/}
-            </div>
-          </div>
+          {autors.map((author) => {
+            return (
+              <div className="flex items-center gap-4 bg-white/50 px-6 py-3 rounded-2xl border border-white/50 shadow-sm">
+                <div className="w-10 h-10 bg-main rounded-full flex items-center justify-center text-white font-bold">
+                  {author[0].toUpperCase()}
+                </div>
+                <div>
+                  <p className="font-bold text-gray-800 leading-none">
+                    {author}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -49,7 +62,7 @@ export default function About() {
 
       <footer className="mt-10 pt-10 border-t border-gray-400/30 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-sm text-gray-500 font-medium">
-          © {new Date().getFullYear()} MathSolutions. Prototipo Educativo.
+          © {new Date().getFullYear()}. Prototipo Educativo.
         </p>
       </footer>
     </section>

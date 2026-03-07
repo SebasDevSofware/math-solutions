@@ -4,8 +4,8 @@ function NavBar() {
   return (
     <nav className="bg-main w-full px-5 py-2 fixed top-0 left-0 right-0 flex justify-between items-center z-50">
       <div>
-        <h2 className="text-gray-100 md:text-4xl text-xl font-extrabold">
-          Math Solutions
+        <h2 className="text-gray-100 md:text-4xl text-sm font-extrabold">
+          Solutions Labs
         </h2>
       </div>
 
