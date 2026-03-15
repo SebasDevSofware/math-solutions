@@ -25,7 +25,7 @@ export default function Home() {
       {/* Encabezado Principal */}
       <div className="text-center space-y-4">
         <h1 className="text-4xl md:text-6xl font-black text-gray-800 tracking-tighter uppercase">
-          Solutions <span className="text-main">Labs</span>
+          Math <span className="text-main">Solutions</span>
         </h1>
         <p className="text-gray-600 text-lg md:text-xl font-medium max-w-2xl mx-auto">
           Una suite de herramientas matemáticas diseñada para la precisión, la
